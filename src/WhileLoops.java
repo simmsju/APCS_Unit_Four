@@ -11,8 +11,16 @@ public class WhileLoops {
      * @return A string consisting of either the range of numbers or Invalid Input
      */
     public static String fromHereToThere(int num1, int num2) {
-
-        return ""; // update or remove this line. It is only there so the tests do not show an error.
+        String nums = "";
+        if (num1 > num2) {
+            return "Invalid input";
+        } else {
+            while (num1 <= num2) {
+                nums += num1 + " ";
+                num1++;
+            }
+            return nums;
+        }
     }
 
     /**
@@ -21,8 +29,20 @@ public class WhileLoops {
      * @return - A string showing how many positive and negative numbers were entered by the user.
      */
     public static String countPosAndNeg() {
-
-        return ""; // update or remove this line. It is only there so the tests do not show an error.
+        Scanner s = new Scanner(System.in);
+        int neg = 0; int pos = 0;
+        while (true) {
+            System.out.println("Enter a positive or negative number or 0 to quit: 10");
+            int num = s.nextInt();
+            if (num > 0) {
+                pos += 1;
+            } else if (num < 0) {
+                neg += 1;
+            } else {
+                break;
+            }
+        }
+        return "There were " + pos + " positive and " + neg + " negative numbers"; // update or remove this line. It is only there so the tests do not show an error.
     }
 
     /**
