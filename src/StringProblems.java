@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class StringProblems {
 
     public static String addHyphens(String s) {
@@ -19,22 +21,42 @@ public class StringProblems {
 
     public static String differentStrings(String s1, String s2) {
         int diff = 0;
-        if (s1.equals(s2)) {
+        String s1Lower = s1.toLowerCase();
+        String s2Lower = s2.toLowerCase();
+        if (s1Lower.equals(s2Lower)) {
             return s1 + " and " + s2 + " are the same";
         } else {
-            for (int i = 0; i < s1.length(); i++) {
-                if (s1.substring(i, i + 1).equals(s2.substring(i, i + 1))) {
+            if (s1Lower.length() > s2Lower.length()) {
+                for (int i = 0; i < s2Lower.length() - 1; i++) {
+                    if (!(s1Lower.substring(i, i + 1).equals(s2Lower.substring(i, i + 1)))) {
+                        diff = s1Lower.indexOf(s1Lower.substring(i, i + 1)) + 1;
+                        break;
+                    }
+                    diff = s2Lower.length() + 1;
+                }
+
+            } else if (s2Lower.length() > s1Lower.length()) {
+                    for (int i = 0; i < s1Lower.length() - 1; i++) {
+                        if (!(s1Lower.substring(i, i + 1).equals(s2Lower.substring(i, i + 1)))) {
+                            diff = s1Lower.indexOf(s1Lower.substring(i, i + 1)) + 1;
+                            break;
+                        }
+                        diff = s1Lower.length() + 1;
+                    }
                 } else {
-                    diff = s1.indexOf(s1.substring(i, i + 1)) + 1;
-                    break;
+                for (int i = 0; i < s1Lower.length() - 1; i++) {
+                    if (!(s1Lower.substring(i, i+1).equals(s2Lower.substring(i, i+1)))) {
+                        diff = s1Lower.indexOf(s1Lower.substring(i, i+1)) + 1;
+                        break;
+                    }
                 }
             }
+            return s1 + " and " + s2 + " are not the same. They differ at letter number " + diff;
         }
-        return s1 + " and " + s2 + " are not the same. They differ at letter number " + diff;
     }
 
     public static void main(String[] args) {
-        System.out.println(differentStrings("Table", "Tablet"));
+        System.out.println(differentStrings("", ""));
     }
 
     public static boolean isPalindrome(String word) {
